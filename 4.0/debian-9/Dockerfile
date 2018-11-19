@@ -26,6 +26,8 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 
 EXPOSE 6379
 
+VOLUME [ "/bitnami/redis/data", "/opt/bitnami/redis/etc", "/opt/bitnami/redis/logs", "/opt/bitnami/redis/tmp" ]
+
 USER 1001
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
