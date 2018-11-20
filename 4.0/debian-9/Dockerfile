@@ -26,6 +26,8 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
 
 EXPOSE 6379
 
+RUN mv /opt/bitnami/redis/etc /opt/bitnami/redis/etc-default
+
 VOLUME [ "/bitnami/redis/data", "/opt/bitnami/redis/etc", "/opt/bitnami/redis/logs", "/opt/bitnami/redis/tmp" ]
 
 USER 1001

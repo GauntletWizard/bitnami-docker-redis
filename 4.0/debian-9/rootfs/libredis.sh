@@ -308,11 +308,7 @@ redis_initialize() {
     info "Initializing Redis..."
 
     # User injected custom configuration
-    if [[ -e "$REDIS_BASEDIR/etc/redis.conf" ]]; then
-        if [[ -e "$REDIS_BASEDIR/etc/redis-default.conf" ]]; then
-            rm "${REDIS_BASEDIR}/etc/redis-default.conf"
-        fi
-    else
+    if [[ ! -e "$REDIS_BASEDIR/etc/redis.conf" ]]; then
         debug "Ensuring expected directories/files exist..."
         for dir in "${REDIS_VOLUME}/data" "${REDIS_BASEDIR}/tmp" "${REDIS_LOGDIR}"; do
             ensure_dir_exists "$dir"
@@ -320,7 +316,7 @@ redis_initialize() {
                 chown "$REDIS_DAEMON_USER:$REDIS_DAEMON_GROUP" "$dir"
             fi
         done
-        mv "$REDIS_BASEDIR/etc/redis-default.conf" "$REDIS_BASEDIR/etc/redis.conf"
+        cp "$REDIS_BASEDIR/etc-default/redis-default.conf" "$REDIS_BASEDIR/etc/redis.conf"
 
         # Redis config
         debug "Setting Redis config file..."
