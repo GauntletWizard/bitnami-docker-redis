@@ -29,8 +29,8 @@ RUN install -d -o 1001 -g 1001 /bitnami/redis/data /opt/bitnami/redis/etc /opt/b
 
 EXPOSE 6379
 
+USER 1001
 VOLUME [ "/bitnami/redis/data", "/opt/bitnami/redis/etc", "/opt/bitnami/redis/logs", "/opt/bitnami/redis/tmp", "/tmp"]
 WORKDIR "/tmp"
-USER 1001
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]
